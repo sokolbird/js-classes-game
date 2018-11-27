@@ -41,6 +41,7 @@ class Game {
     this.maxFails = 6;
     this.steps = 0;
     this.hangman = new Hangman(word);
+    this.promptedLetters = [];
   }
 
   start() {
@@ -48,12 +49,16 @@ class Game {
     while (this.fails < this.maxFails && !this.isWordGuessed()) {
       let letter = prompt("Угадай букву!");
       this.hangman.guessLetter(letter);
-      if (!this.hangman.containsLetter(letter)) { 
+      if (!this.promptedLetters.includes(letter)) {
+        this.promptedLetters.push(letter);
+        if (!this.hangman.containsLetter(letter)) {
           this.fails++;
-          console.log(`Не угадал! Осталось ${this.maxFails - this.fails} попыток.`);
-      }
-      else console.log(this.hangman.getHiddenWord);
-      this.steps++;
+          console.log(
+            `Не угадал! Осталось ${this.maxFails - this.fails} попыток.`
+          );
+        } else console.log(this.hangman.getHiddenWord);
+        this.steps++;
+      } else console.log(`Буква ${letter} уже была!`);
     }
 
     this.isWordGuessed()
@@ -75,5 +80,5 @@ class Game {
   }
 }
 
-let game = new Game("синхрофазотрон");
+let game = new Game("кооперация");
 game.start();
