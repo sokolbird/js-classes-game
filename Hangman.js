@@ -99,11 +99,12 @@ class Game {
           this.fails++;
           console.log(this.hangFrames[this.fails]);
           console.log(
-            `Не угадал! Осталось ${this.maxFails - this.fails} попыток.`
+            `Не угадал, буквы "${letter}" здесь нет! Осталось ${this.maxFails -
+              this.fails} попыток.`
           );
         } else console.log(this.hangman.getHiddenWord);
         this.steps++;
-      } else console.log(`Буква ${letter} уже была!`);
+      } else console.log(`Буква "${letter}" уже была!`);
     }
 
     this.isWordGuessed()
@@ -121,9 +122,21 @@ class Game {
   }
 
   failEndGame() {
-    return `Прости, ты сделал ${this.fails} ошибок и проиграл :(`;
+    return `Прости, ты сделал ${this.fails} ошибок и проиграл :(\nА слово было таким: ${this.hangman.word}`;
   }
 }
 
-let game = new Game("реинкарнация");
+let words = [
+  "аддикция",
+  "амбивалентность",
+  "декадентство",
+  "конгруэнтность",
+  "эвфемизм",
+  "эскалация",
+  "катарсис",
+  "фрустрация",
+  "цугцванг"
+];
+
+let game = new Game(words[Math.floor(Math.random() * words.length)]);
 game.start();
