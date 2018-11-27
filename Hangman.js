@@ -125,5 +125,5 @@ class Game {
   }
 }
 
-let game = new Game("амплитуда");
+let game = new Game("реинкарнация");
 game.start();
