@@ -42,6 +42,50 @@ class Game {
     this.steps = 0;
     this.hangman = new Hangman(word);
     this.promptedLetters = [];
+    this.hangFrames = [
+      `
+    _____
+    |   
+    |   
+    |  
+    `,
+      `
+    _____
+    |   😕
+    |
+    |
+    `,
+      `
+    _____
+    |   😕
+    |   |
+    |
+    `,
+      `
+    _____
+    |   😕
+    |  /|
+    |
+    `,
+      `
+    _____
+    |   😕
+    |  /|\\
+    |
+    `,
+      `
+    _____
+    |   😕
+    |  /|\\
+    |  /
+    `,
+      `
+    _____
+    |   😕
+    |  /|\\
+    |  / \\
+    `
+    ];
   }
 
   start() {
@@ -53,6 +97,7 @@ class Game {
         this.promptedLetters.push(letter);
         if (!this.hangman.containsLetter(letter)) {
           this.fails++;
+          console.log(this.hangFrames[this.fails]);
           console.log(
             `Не угадал! Осталось ${this.maxFails - this.fails} попыток.`
           );
@@ -80,5 +125,5 @@ class Game {
   }
 }
 
-let game = new Game("кооперация");
+let game = new Game("амплитуда");
 game.start();
